@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IVAO Radar — ATC Planning</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-dot"></span>IVAO RADAR</div>
+  <nav><a href="index.html">Radar</a><a class="active" href="planning.html">ATC Planning</a><a href="airport.html">Airport Board</a></nav>
+  <div class="utc" id="utcClock">--:--:-- UTC</div>
+</header>
+
+<main class="planning-page">
+  <section class="planning-head">
+    <h1 id="dateTitle">Lundi 21 septembre 2026</h1>
+    <div class="planning-tools">
+      <input id="filter" type="search" placeholder="Filtrer par VID ou position">
+      <button id="prevDay">←</button>
+      <button id="today">▣</button>
+      <button id="nextDay">→</button>
+    </div>
+    <div class="time-readout">Heure sélectionnée : <b id="selectedTime">19:36 UTC</b></div>
+    <input id="timeSlider" type="range" min="0" max="1439" value="1176" step="1">
+
+    <div class="view-toggle" role="group" aria-label="Mode d'affichage">
+      <button id="tableViewBtn" class="view-btn active">☷ Tableau</button>
+      <button id="mapViewBtn" class="view-btn">⌖ Carte</button>
+    </div>
+  </section>
+
+  <section id="tableView" class="timeline-shell">
+    <div class="timeline">
+      <div class="timeline-header">
+        <div class="position-header">POSITION</div>
+        <div class="hours" id="hours"></div>
+      </div>
+      <div id="rows"></div>
+    </div>
+  </section>
+
+  <section id="mapView" class="planning-map-shell hidden">
+    <div id="planningMap"></div>
+    <div class="planning-map-info">
+      <b>ATC Planning — mode carte</b>
+      <span>Les positions actives à l'heure sélectionnée sont affichées.</span>
+    </div>
+    <div class="planning-map-note">
+      <b>Prototype :</b> les coordonnées géographiques des positions ne sont pas encore récupérées
+      depuis les données réseau IVAO. Les marqueurs de cette version servent uniquement à tester
+      l'interface et le fonctionnement du slider.
+    </div>
+  </section>
+
+  <div class="prototype-note">
+    <b>Version prototype.</b> La structure et les positions ci-dessous proviennent de l'inspecteur du planning fourni.
+    Les créneaux colorés sont uniquement des éléments de démonstration visuelle : leurs horaires ne sont pas encore reliés aux réservations IVAO.
+  </div>
+</main>
+
+<script src="planning.js"></script>
+</body>
+</html>

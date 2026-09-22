@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IVAO Radar — Airport Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-dot"></span>IVAO RADAR</div>
+  <nav><a href="index.html">Radar</a><a href="planning.html">ATC Planning</a><a class="active" href="airport.html">Airport Board</a></nav>
+  <div class="utc" id="utcClock">--:--:-- UTC</div>
+</header>
+
+<main class="airport-page">
+  <section class="airport-search">
+    <h1>Airport Board</h1>
+    <p>Recherche par code OACI</p>
+    <form id="airportForm">
+      <input id="icao" maxlength="4" value="LFPG" placeholder="Ex. LFPG">
+      <button>Afficher</button>
+    </form>
+  </section>
+
+  <section id="airportBoard" class="board hidden">
+    <div class="airport-title">
+      <div><span class="eyebrow">AÉROPORT</span><h2 id="airportCode">LFPG</h2></div>
+      <div class="airport-time" id="boardTime"></div>
+    </div>
+
+    <div class="flight-grid">
+      <section>
+        <h3>ARRIVÉES</h3>
+        <div class="flight-table">
+          <div class="flight-head"><span>UTC</span><span>CALLSIGN</span><span>PROVENANCE</span><span>STATUT</span></div>
+          <div id="arrivals"></div>
+        </div>
+      </section>
+      <section>
+        <h3>DÉPARTS</h3>
+        <div class="flight-table">
+          <div class="flight-head"><span>UTC</span><span>CALLSIGN</span><span>DESTINATION</span><span>STATUT</span></div>
+          <div id="departures"></div>
+        </div>
+      </section>
+    </div>
+    <div class="prototype-note">Les vols affichés dans cette première version sont des exemples d'interface. La source IVAO des mouvements d'aéroport sera branchée lorsque nous aurons identifié la requête réseau correspondante.</div>
+  </section>
+</main>
+
+<script>
+const demo = {
+ LFPG:{
+  arrivals:[["19:42","DEMO123","LFML","INBOUND"],["19:55","DEMO456","EGLL","INBOUND"],["20:08","DEMO789","EDDF","INBOUND"]],
+  departures:[["19:50","DEMO321","LFPO","SCHEDULED"],["20:05","DEMO654","EDDF","SCHEDULED"],["20:18","DEMO987","LIRF","SCHEDULED"]]
+ }
+};
+const form=document.getElementById("airportForm");
+form.addEventListener("submit",e=>{
+ e.preventDefault();
+ const code=document.getElementById("icao").value.trim().toUpperCase();
+ document.getElementById("airportCode").textContent=code||"----";
+ document.getElementById("airportBoard").classList.remove("hidden");
+ const d=demo[code];
+ const fill=(id,data)=>document.getElementById(id).innerHTML=(d?data:[]).map(r=>`<div class="flight-row"><span>${r[0]}</span><b>${r[1]}</b><span>${r[2]}</span><span class="status">${r[3]}</span></div>`).join("") || `<div class="empty">Aucune donnée de démonstration pour ${code}.</div>`;
+ fill("arrivals",d?.arrivals);
+ fill("departures",d?.departures);
+});
+function clock(){
+ const d=new Date();
+ document.getElementById("utcClock").textContent=d.toISOString().slice(11,19)+" UTC";
+ document.getElementById("boardTime").textContent=d.toISOString().slice(11,16)+" UTC";
+}
+clock();setInterval(clock,1000);
+</script>
+</body>
+</html>
