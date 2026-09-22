@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IVAO Radar — Prototype</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-dot"></span>IVAO RADAR</div>
+    <nav>
+      <a class="active" href="index.html">Radar</a>
+      <a href="planning.html">ATC Planning</a>
+      <a href="airport.html">Airport Board</a>
+    </nav>
+    <div class="utc" id="utcClock">--:--:-- UTC</div>
+  </header>
+
+  <main class="radar-layout">
+    <aside class="sidebar">
+      <div class="panel">
+        <h3>Recherche</h3>
+        <input id="radarSearch" type="search" placeholder="Callsign, VID ou position">
+      </div>
+      <div class="panel">
+        <h3>Affichage</h3>
+        <label><input type="checkbox" id="showAircraft" checked> Avions</label>
+        <label><input type="checkbox" id="showAtc" checked> ATC</label>
+        <label><input type="checkbox" id="showSectors" checked> Secteurs</label>
+      </div>
+      <div class="panel status-panel">
+        <div><b id="aircraftCount">0</b><span>avions</span></div>
+        <div><b id="atcCount">0</b><span>ATC</span></div>
+      </div>
+      <div class="notice">
+        <strong>Prototype</strong>
+        <p>Les polygones FIR/secteurs et les données temps réel ne sont pas encore connectés. Cette version ne fabrique pas de coordonnées de secteurs.</p>
+      </div>
+    </aside>
+
+    <section class="map-wrap">
+      <div id="map"></div>
+      <div class="map-badge">WEBEYE / RADAR — prototype</div>
+      <div class="legend">
+        <span><i class="dot aircraft"></i>Avion</span>
+        <span><i class="dot atc"></i>ATC</span>
+        <span><i class="line sector"></i>Secteur — source à connecter</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="radar.js"></script>
+</body>
+</html>
