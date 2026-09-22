@@ -11,6 +11,7 @@ nav{display:flex;gap:8px}nav a{padding:9px 13px;border-radius:8px;color:#aeb5bf;
 @media(max-width:850px){.topbar{gap:10px;padding:0 12px}.topbar nav a{font-size:11px;padding:7px}.utc{display:none}.radar-layout{grid-template-columns:1fr}.sidebar{position:absolute;z-index:700;width:250px;height:auto;opacity:.95}.map-wrap{height:calc(100vh - 68px)}.flight-grid{grid-template-columns:1fr}.planning-page{padding:10px}}
 
 .infobadge {display: block; background-color: #0d2c99; color: #fff; border-radius: 10px;  padding: 10px}
+.infobadge .center {text-align: center; display: block}
 .view-toggle{display:flex;justify-content:center;gap:6px;margin-top:15px}
 .view-btn{border:1px solid #41464e;background:#202328;color:#aeb6c0;border-radius:7px;padding:8px 16px;font-size:12px;cursor:pointer}
 .view-btn:hover{background:#30353c;color:#fff}
